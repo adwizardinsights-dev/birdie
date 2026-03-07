@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Birdie Golf Club Rentals – Pompano</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --navy:  #0B1F4B;
+      --navy2: #0D2660;
+      --gold:  #C9A84C;
+      --gold2: #E2C06A;
+      --white: #FFFFFF;
+      --offwhite: #F5F7FA;
+      --muted: #6B7280;
+      --border: #E2E8F0;
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', sans-serif; color: var(--navy); background: var(--white); overflow-x: hidden; }
+    a { text-decoration: none; color: inherit; }
+
+    /* ── LOGO SVG ── */
+    .logo-wrap { display: flex; align-items: center; gap: 0.55rem; }
+    .logo-wrap svg { width: 40px; height: 40px; }
+    .logo-text { font-size: 1.45rem; font-weight: 900; letter-spacing: -1px; color: var(--navy); }
+    .logo-text span { color: var(--gold); }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: var(--white);
+      border-bottom: 1px solid var(--border);
+      padding: 0 2rem;
+      height: 68px;
+      display: flex; align-items: center; justify-content: space-between;
+      box-shadow: 0 2px 12px rgba(11,31,75,0.07);
+    }
+    .nav-links { display: flex; gap: 0; list-style: none; position: relative; }
+    .nav-links > li { position: relative; }
+    .nav-links > li > a {
+      display: flex; align-items: center; gap: 0.3rem;
+      padding: 0.5rem 1rem;
+      font-size: 0.9rem; font-weight: 600; color: var(--navy);
+      transition: color 0.2s;
+    }
+    .nav-links > li > a:hover { color: var(--gold); }
+    .dropdown {
+      display: none; position: absolute; top: 100%; left: 0;
+      background: var(--white); border: 1px solid var(--border);
+      border-radius: 10px; min-width: 180px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+      padding: 0.4rem 0;
+    }
+    .nav-links > li:hover .dropdown { display: block; }
+    .dropdown a { display: block; padding: 0.55rem 1.2rem; font-size: 0.87rem; color: var(--navy); }
+    .dropdown a:hover { background: var(--offwhite); color: var(--gold); }
+    .nav-right { display: flex; align-items: center; gap: 1rem; }
+    .nav-phone { font-size: 0.9rem; font-weight: 700; color: var(--gold); }
+    .btn-signin {
+      padding: 0.5rem 1.2rem; border-radius: 8px;
+      border: 2px solid var(--navy); color: var(--navy);
+      font-weight: 700; font-size: 0.85rem; transition: all 0.2s;
+    }
+    .btn-signin:hover { background: var(--navy); color: var(--white); }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      background: linear-gradient(135deg, var(--navy) 0%, var(--navy2) 60%, #0A3060 100%);
+      display: flex; align-items: center;
+      padding: 100px 2rem 4rem;
+      position: relative; overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse at 80% 50%, rgba(201,168,76,0.12) 0%, transparent 60%),
+        radial-gradient(ellipse at 10% 80%, rgba(201,168,76,0.07) 0%, transparent 50%);
+      pointer-events: none;
+    }
+    /* golf course grass line */
+    .hero::after {
+      content: '';
+      position: absolute; bottom: 0; left: 0; right: 0;
+      height: 6px;
+      background: linear-gradient(90deg, #2D6A4F, #40916C, #2D6A4F);
+    }
+    .hero-inner {
+      max-width: 1100px; margin: 0 auto; width: 100%;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center;
+    }
+    .hero-content { position: relative; z-index: 1; }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 0.4rem;
+      background: rgba(201,168,76,0.15); border: 1px solid rgba(201,168,76,0.4);
+      color: var(--gold2); font-size: 0.78rem; font-weight: 700;
+      padding: 0.35rem 0.9rem; border-radius: 999px; margin-bottom: 1.5rem;
+      letter-spacing: 0.5px; text-transform: uppercase;
+    }
+    .hero h1 {
+      font-size: clamp(2.4rem, 5vw, 3.8rem); font-weight: 900;
+      color: var(--white); line-height: 1.05; letter-spacing: -2px;
+      margin-bottom: 1rem;
+    }
+    .hero h1 .gold { color: var(--gold2); }
+    .hero-sub {
+      font-size: 1.05rem; color: rgba(255,255,255,0.7);
+      line-height: 1.7; margin-bottom: 2rem; max-width: 460px;
+    }
+    .hero-sub strong { color: var(--gold2); }
+    .hero-phone {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      color: var(--gold2); font-size: 1.1rem; font-weight: 800;
+      margin-bottom: 2rem;
+    }
+    .price-tag {
+      display: inline-flex; align-items: baseline; gap: 0.3rem;
+      background: var(--gold); color: var(--navy);
+      padding: 0.6rem 1.4rem; border-radius: 12px;
+      font-weight: 900; font-size: 1.4rem; letter-spacing: -0.5px;
+      margin-bottom: 2rem;
+    }
+    .price-tag small { font-size: 0.85rem; font-weight: 600; }
+
+    /* ── QUOTE FORM ── */
+    .quote-form {
+      background: var(--white); border-radius: 20px;
+      padding: 2rem; box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+      position: relative; z-index: 1;
+    }
+    .quote-form h2 { font-size: 1.3rem; font-weight: 800; color: var(--navy); margin-bottom: 0.3rem; }
+    .quote-form p { font-size: 0.85rem; color: var(--muted); margin-bottom: 1.4rem; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 0.8rem; }
+    .form-group { display: flex; flex-direction: column; gap: 0.35rem; margin-bottom: 0.8rem; }
+    .form-group label { font-size: 0.8rem; font-weight: 700; color: var(--navy); text-transform: uppercase; letter-spacing: 0.5px; }
+    .form-group input {
+      border: 2px solid var(--border); border-radius: 10px;
+      padding: 0.65rem 0.9rem; font-size: 0.92rem; font-family: inherit;
+      color: var(--navy); transition: border-color 0.2s;
+      outline: none;
+    }
+    .form-group input:focus { border-color: var(--gold); }
+    .btn-submit {
+      width: 100%; padding: 0.85rem;
+      background: var(--gold); color: var(--navy);
+      font-weight: 800; font-size: 1rem; border-radius: 12px;
+      border: none; cursor: pointer; font-family: inherit;
+      transition: background 0.2s, transform 0.2s;
+      margin-top: 0.4rem;
+    }
+    .btn-submit:hover { background: var(--gold2); transform: translateY(-1px); }
+
+    /* ── SECTIONS SHARED ── */
+    section { padding: 6rem 2rem; }
+    .container { max-width: 1100px; margin: 0 auto; }
+    .section-label {
+      font-size: 0.75rem; font-weight: 700; letter-spacing: 2px;
+      text-transform: uppercase; color: var(--gold); margin-bottom: 0.6rem;
+    }
+    .section-title {
+      font-size: clamp(1.8rem, 3.5vw, 2.6rem); font-weight: 900;
+      letter-spacing: -1.5px; line-height: 1.1; color: var(--navy);
+    }
+    .section-sub { color: var(--muted); margin-top: 0.7rem; font-size: 1rem; line-height: 1.6; max-width: 520px; }
+
+    /* ── RESERVE BANNER ── */
+    .reserve-banner {
+      background: linear-gradient(135deg, var(--navy) 0%, var(--navy2) 100%);
+      padding: 4rem 2rem; text-align: center;
+    }
+    .reserve-banner h2 { font-size: clamp(1.8rem, 3.5vw, 2.8rem); font-weight: 900; color: var(--white); letter-spacing: -1.5px; margin-bottom: 0.8rem; }
+    .reserve-banner p { color: rgba(255,255,255,0.7); font-size: 1rem; margin-bottom: 1.8rem; }
+    .reserve-banner .btn-gold {
+      display: inline-block; background: var(--gold); color: var(--navy);
+      font-weight: 800; font-size: 1rem; padding: 0.9rem 2.5rem;
+      border-radius: 12px; transition: background 0.2s, transform 0.2s;
+    }
+    .reserve-banner .btn-gold:hover { background: var(--gold2); transform: translateY(-2px); }
+
+    /* ── ADDRESS ── */
+    .address-section { background: var(--offwhite); }
+    .address-card {
+      background: var(--white); border-radius: 20px; padding: 2.5rem;
+      border: 1px solid var(--border); max-width: 520px;
+      box-shadow: 0 4px 20px rgba(11,31,75,0.06);
+    }
+    .address-card h3 { font-size: 1.2rem; font-weight: 800; color: var(--navy); margin-bottom: 0.8rem; }
+    .address-card p { color: var(--muted); font-size: 0.95rem; line-height: 1.7; }
+    .address-card .phone-link { color: var(--gold); font-weight: 700; font-size: 1.05rem; display: block; margin-top: 0.5rem; }
+
+    /* ── GROUP / FORE OR MORE ── */
+    .fore-section { background: var(--navy); }
+    .fore-section .section-title { color: var(--white); }
+    .fore-section .section-sub { color: rgba(255,255,255,0.6); }
+    .fore-cards {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.2rem; margin-top: 3rem;
+    }
+    .fore-card {
+      background: rgba(255,255,255,0.05); border: 1px solid rgba(201,168,76,0.2);
+      border-radius: 16px; padding: 1.8rem; text-align: center;
+      transition: border-color 0.3s, transform 0.3s;
+    }
+    .fore-card:hover { border-color: var(--gold); transform: translateY(-4px); }
+    .fore-card .icon { font-size: 2.2rem; margin-bottom: 0.8rem; }
+    .fore-card h3 { font-weight: 800; font-size: 1rem; color: var(--white); margin-bottom: 0.5rem; }
+    .fore-card p { font-size: 0.85rem; color: rgba(255,255,255,0.55); line-height: 1.6; }
+
+    /* ── ABOUT ── */
+    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+    .about-text .section-sub { max-width: 100%; }
+    .about-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; margin-top: 2rem; }
+    .stat-card {
+      background: var(--offwhite); border-radius: 14px; padding: 1.4rem;
+      border-left: 4px solid var(--gold);
+    }
+    .stat-card .num { font-size: 2rem; font-weight: 900; color: var(--navy); letter-spacing: -1px; }
+    .stat-card .lbl { font-size: 0.8rem; color: var(--muted); margin-top: 0.2rem; }
+    .about-visual {
+      background: linear-gradient(135deg, var(--navy) 0%, var(--navy2) 100%);
+      border-radius: 24px; padding: 3rem 2rem; text-align: center;
+      color: var(--white);
+    }
+    .about-visual .big-icon { font-size: 5rem; }
+    .about-visual h3 { font-size: 1.3rem; font-weight: 800; margin-top: 1rem; }
+    .about-visual p { font-size: 0.9rem; color: rgba(255,255,255,0.65); margin-top: 0.5rem; }
+
+    /* ── REVIEWS ── */
+    .reviews-section { background: var(--offwhite); }
+    .reviews-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.2rem; margin-top: 3rem;
+    }
+    .review-card {
+      background: var(--white); border-radius: 16px; padding: 1.8rem;
+      border: 1px solid var(--border); box-shadow: 0 2px 12px rgba(11,31,75,0.05);
+    }
+    .stars { color: var(--gold); font-size: 1.1rem; margin-bottom: 0.8rem; }
+    .review-card p { font-size: 0.9rem; color: var(--muted); line-height: 1.7; font-style: italic; margin-bottom: 1.2rem; }
+    .reviewer { font-size: 0.85rem; font-weight: 700; color: var(--navy); }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--navy); padding: 3rem 2rem 2rem;
+      border-top: 4px solid var(--gold);
+    }
+    .footer-inner {
+      max-width: 1100px; margin: 0 auto;
+      display: flex; justify-content: space-between; align-items: center;
+      flex-wrap: wrap; gap: 1.5rem; margin-bottom: 2rem;
+    }
+    .footer-logo .logo-text { color: var(--white); }
+    .footer-links { display: flex; gap: 2rem; flex-wrap: wrap; }
+    .footer-links a { font-size: 0.85rem; color: rgba(255,255,255,0.55); transition: color 0.2s; }
+    .footer-links a:hover { color: var(--gold); }
+    .footer-copy {
+      max-width: 1100px; margin: 0 auto;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      padding-top: 1.5rem; text-align: center;
+      font-size: 0.8rem; color: rgba(255,255,255,0.35);
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      .hero-inner { grid-template-columns: 1fr; gap: 2.5rem; }
+      .about-grid { grid-template-columns: 1fr; }
+      .form-row { grid-template-columns: 1fr; }
+      .nav-links { display: none; }
+      .footer-inner { justify-content: center; text-align: center; }
+      .footer-links { justify-content: center; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="logo-wrap">
+    <svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <!-- Golf ball body -->
+      <circle cx="40" cy="52" r="22" fill="white" stroke="#C9A84C" stroke-width="2.5"/>
+      <!-- Golf ball dimples -->
+      <circle cx="33" cy="46" r="2" fill="#E2E8F0"/>
+      <circle cx="40" cy="43" r="2" fill="#E2E8F0"/>
+      <circle cx="47" cy="46" r="2" fill="#E2E8F0"/>
+      <circle cx="36" cy="53" r="2" fill="#E2E8F0"/>
+      <circle cx="44" cy="53" r="2" fill="#E2E8F0"/>
+      <circle cx="40" cy="60" r="2" fill="#E2E8F0"/>
+      <circle cx="33" cy="58" r="2" fill="#E2E8F0"/>
+      <circle cx="47" cy="58" r="2" fill="#E2E8F0"/>
+      <!-- Left wing -->
+      <path d="M18 38 Q8 22 14 10 Q20 24 30 34" fill="#C9A84C" opacity="0.9"/>
+      <path d="M14 10 Q18 26 28 36" stroke="#0B1F4B" stroke-width="1" fill="none" opacity="0.3"/>
+      <!-- Right wing -->
+      <path d="M62 38 Q72 22 66 10 Q60 24 50 34" fill="#C9A84C" opacity="0.9"/>
+      <path d="M66 10 Q62 26 52 36" stroke="#0B1F4B" stroke-width="1" fill="none" opacity="0.3"/>
+      <!-- Wing shine -->
+      <path d="M20 32 Q12 20 16 12" stroke="white" stroke-width="1.5" fill="none" opacity="0.4" stroke-linecap="round"/>
+      <path d="M60 32 Q68 20 64 12" stroke="white" stroke-width="1.5" fill="none" opacity="0.4" stroke-linecap="round"/>
+    </svg>
+    <div class="logo-text">Birdie<span>.</span></div>
+  </div>
+
+  <ul class="nav-links">
+    <li>
+      <a href="#pricing">Pricing / FAQ ▾</a>
+      <div class="dropdown">
+        <a href="#pricing">Pricing</a>
+        <a href="#faq">FAQ</a>
+      </div>
+    </li>
+    <li>
+      <a href="#location">Locations ▾</a>
+      <div class="dropdown">
+        <a href="#location">Pompano</a>
+      </div>
+    </li>
+  </ul>
+
+  <div class="nav-right">
+    <span class="nav-phone">📞 (305) 954-2699</span>
+    <a href="#" class="btn-signin">Sign In</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-content">
+      <div class="hero-badge">⛳ Golf Club Rentals · Pompano</div>
+      <h1>Easy Pricing<br/><span class="gold">Pompano</span></h1>
+      <p class="hero-sub">
+        Premium golf club rentals starting at <strong>$59 per set</strong>.
+        No lugging clubs through the airport — we deliver quality equipment
+        right to your course in Pompano.
+      </p>
+      <div class="price-tag">
+        From $59 <small>/ set</small>
+      </div>
+      <div class="hero-phone">📞 (305) 954-2699</div>
+      <p style="font-size:0.85rem; color:rgba(255,255,255,0.5);">Fast quotes · Same-day availability · All skill levels</p>
+    </div>
+
+    <!-- QUOTE FORM -->
+    <div class="quote-form">
+      <h2>Reserve Your Clubs Today</h2>
+      <p>Get a fast quote — we'll confirm same day.</p>
+      <div class="form-group">
+        <label>Full Name</label>
+        <input type="text" placeholder="John Smith" />
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Email</label>
+          <input type="email" placeholder="you@email.com" />
+        </div>
+        <div class="form-group">
+          <label>Phone</label>
+          <input type="tel" placeholder="(305) 000-0000" />
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label># Sets Right Handed</label>
+          <input type="number" placeholder="0" min="0" />
+        </div>
+        <div class="form-group">
+          <label># Sets Left Handed</label>
+          <input type="number" placeholder="0" min="0" />
+        </div>
+      </div>
+      <button class="btn-submit">⛳ Send My Quote Request</button>
+    </div>
+  </div>
+</section>
+
+<!-- RESERVE BANNER -->
+<div class="reserve-banner">
+  <h2>Reserve Your Clubs Today</h2>
+  <p>Fast quotes, friendly service, and clubs ready when you are. Campaigns can begin generating tee times within hours.</p>
+  <a href="tel:3059542699" class="btn-gold">📞 Call (305) 954-2699</a>
+</div>
+
+<!-- ADDRESS -->
+<section id="location" class="address-section">
+  <div class="container">
+    <p class="section-label">Our Location</p>
+    <h2 class="section-title">Find Us in Pompano</h2>
+    <p class="section-sub" style="margin-bottom:2rem;">Conveniently located to serve all major golf courses in the Pompano area.</p>
+    <div class="address-card">
+      <h3>📍 Birdie Golf Club Rentals – Pompano</h3>
+      <p>
+        Serving Pompano Beach, FL and surrounding areas<br/>
+        Deerfield Beach · Boca Raton · Coral Springs · Fort Lauderdale
+      </p>
+      <a href="tel:3059542699" class="phone-link">📞 (305) 954-2699</a>
+    </div>
+  </div>
+</section>
+
+<!-- FORE OR MORE -->
+<section class="fore-section">
+  <div class="container">
+    <p class="section-label" style="color: var(--gold);">Group Events</p>
+    <h2 class="section-title">Fore or More</h2>
+    <p class="section-sub">Planning a golf outing, corporate event, or bachelor party? We handle group rentals of all sizes with ease.</p>
+    <div class="fore-cards">
+      <div class="fore-card">
+        <div class="icon">🏌️</div>
+        <h3>Corporate Outings</h3>
+        <p>Impress clients and reward your team with premium equipment for the whole group.</p>
+      </div>
+      <div class="fore-card">
+        <div class="icon">🎉</div>
+        <h3>Special Events</h3>
+        <p>Bachelor parties, birthdays, charity tournaments — we've got you covered.</p>
+      </div>
+      <div class="fore-card">
+        <div class="icon">👨‍👩‍👧‍👦</div>
+        <h3>Family Outings</h3>
+        <p>Right and left-handed sets for every age and skill level in your group.</p>
+      </div>
+      <div class="fore-card">
+        <div class="icon">🏆</div>
+        <h3>Tournaments</h3>
+        <p>Equip your whole tournament field with consistent, high-quality club sets.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-text">
+        <p class="section-label">About Us</p>
+        <h2 class="section-title">Welcome to<br/>Birdie Golf Club Rentals</h2>
+        <p class="section-sub">
+          Birdie is Pompano's premier golf equipment rental service. We believe every round
+          should start with the right clubs — without the hassle of hauling your own.
+          Whether you're a visitor, a snowbird, or a local who left their clubs at home,
+          we deliver professional-grade sets right to your course.
+        </p>
+        <p class="section-sub" style="margin-top:1rem;">
+          Serving golfers across South Florida with fast delivery, honest pricing, and a commitment to making every round great.
+        </p>
+        <div class="about-stats">
+          <div class="stat-card"><div class="num">500+</div><div class="lbl">Happy Golfers</div></div>
+          <div class="stat-card"><div class="num">20+</div><div class="lbl">Partner Courses</div></div>
+          <div class="stat-card"><div class="num">$59</div><div class="lbl">Starting Price</div></div>
+          <div class="stat-card"><div class="num">⚡</div><div class="lbl">Same-Day Service</div></div>
+        </div>
+      </div>
+      <div class="about-visual">
+        <div class="big-icon">⛳</div>
+        <h3>Premium Clubs Delivered</h3>
+        <p>Titleist, Callaway, TaylorMade and more — right and left-handed available for all skill levels.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- REVIEWS -->
+<section id="reviews" class="reviews-section">
+  <div class="container">
+    <p class="section-label">Reviews</p>
+    <h2 class="section-title">What Our Golfers Say</h2>
+    <div class="reviews-grid">
+      <div class="review-card">
+        <div class="stars">★★★★★</div>
+        <p>"Super easy process. Called ahead, clubs were ready at the course. Great condition and fair price!"</p>
+        <div class="reviewer">— Michael T., Pompano</div>
+      </div>
+      <div class="review-card">
+        <div class="stars">★★★★★</div>
+        <p>"Used Birdie for our company golf day. 12 sets, zero issues. Everyone loved the clubs. Will use again."</p>
+        <div class="reviewer">— Sarah M., Coral Springs</div>
+      </div>
+      <div class="review-card">
+        <div class="stars">★★★★★</div>
+        <p>"Visiting from out of town and didn't want to travel with clubs. Birdie saved the trip. Highly recommend!"</p>
+        <div class="reviewer">— Carlos R., Miami</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-logo logo-wrap">
+      <svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg" width="36" height="36">
+        <circle cx="40" cy="52" r="22" fill="white" stroke="#C9A84C" stroke-width="2.5"/>
+        <circle cx="33" cy="46" r="2" fill="#CBD5E1"/>
+        <circle cx="40" cy="43" r="2" fill="#CBD5E1"/>
+        <circle cx="47" cy="46" r="2" fill="#CBD5E1"/>
+        <circle cx="36" cy="53" r="2" fill="#CBD5E1"/>
+        <circle cx="44" cy="53" r="2" fill="#CBD5E1"/>
+        <circle cx="40" cy="60" r="2" fill="#CBD5E1"/>
+        <circle cx="33" cy="58" r="2" fill="#CBD5E1"/>
+        <circle cx="47" cy="58" r="2" fill="#CBD5E1"/>
+        <path d="M18 38 Q8 22 14 10 Q20 24 30 34" fill="#C9A84C" opacity="0.9"/>
+        <path d="M62 38 Q72 22 66 10 Q60 24 50 34" fill="#C9A84C" opacity="0.9"/>
+      </svg>
+      <div class="logo-text" style="color:white;">Birdie<span>.</span></div>
+    </div>
+    <div class="footer-links">
+      <a href="#">Privacy Policy</a>
+      <a href="#">Terms & Conditions</a>
+      <a href="#">Affiliate</a>
+      <a href="tel:3059542699">📞 (305) 954-2699</a>
+    </div>
+  </div>
+  <div class="footer-copy">© 2026 Birdie Golf Club Rentals · Pompano, FL · All rights reserved.</div>
+</footer>
+
+</body>
+</html>
