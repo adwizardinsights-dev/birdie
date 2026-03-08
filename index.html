@@ -375,49 +375,36 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <div class="quote-form">
       <h2>Reserve Your Clubs Today</h2>
       <p>Get a fast quote — we'll confirm same day.</p>
-      <form id="quoteForm">
+      <form action="https://formsubmit.co/adwizardinsights@gmail.com" method="POST">
+        <input type="hidden" name="_next" value="https://www.birdiegolfrentals.com/thank-you.html" />
+        <input type="hidden" name="_captcha" value="false" />
+        <input type="hidden" name="_subject" value="🏌️ New Lead – Birdie Golf Club Rentals" />
         <div class="form-group">
           <label>Full Name</label>
-          <input type="text" id="f-name" placeholder="John Smith" required />
+          <input type="text" name="name" placeholder="John Smith" required />
         </div>
         <div class="form-row">
           <div class="form-group">
             <label>Email</label>
-            <input type="email" id="f-email" placeholder="you@email.com" required />
+            <input type="email" name="email" placeholder="you@email.com" required />
           </div>
           <div class="form-group">
             <label>Phone</label>
-            <input type="tel" id="f-phone" placeholder="(305) 000-0000" required />
+            <input type="tel" name="phone" placeholder="(305) 000-0000" required />
           </div>
         </div>
         <div class="form-row">
           <div class="form-group">
             <label># Sets Right Handed</label>
-            <input type="number" id="f-right" placeholder="0" min="0" />
+            <input type="number" name="Right-Handed Sets" placeholder="0" min="0" />
           </div>
           <div class="form-group">
             <label># Sets Left Handed</label>
-            <input type="number" id="f-left" placeholder="0" min="0" />
+            <input type="number" name="Left-Handed Sets" placeholder="0" min="0" />
           </div>
         </div>
-        <button type="button" class="btn-submit" onclick="sendLead()">⛳ Send My Quote Request</button>
+        <button type="submit" class="btn-submit">⛳ Send My Quote Request</button>
       </form>
-      <script>
-        function sendLead() {
-          var name  = document.getElementById('f-name').value.trim();
-          var email = document.getElementById('f-email').value.trim();
-          var phone = document.getElementById('f-phone').value.trim();
-          if (!name || !email || !phone) { alert('Please fill in Name, Email and Phone.'); return; }
-          var data = new FormData();
-          data.append('name', name);
-          data.append('email', email);
-          data.append('phone', phone);
-          data.append('right', document.getElementById('f-right').value || '0');
-          data.append('left', document.getElementById('f-left').value || '0');
-          fetch('https://formspree.io/f/xlgpdzbj', { method: 'POST', body: data, headers: { 'Accept': 'application/json' } });
-          window.location.href = 'https://www.birdiegolfrentals.com/thank-you.html';
-        }
-      </script>
     </div>
   </div>
 </section>
