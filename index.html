@@ -626,11 +626,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     })
     .then(res => {
       if (res.ok) {
-        document.getElementById('form-fields').style.display = 'none';
-        document.getElementById('form-success').style.display = 'block';
-        if (typeof gtag !== 'undefined') {
-          gtag('event', 'conversion', { 'send_to': 'AW-16902654136' });
-        }
+        window.location.href = '/thank-you.html';
       } else {
         throw new Error('Failed');
       }
