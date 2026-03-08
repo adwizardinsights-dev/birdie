@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Thank You | Birdie Golf Club Rentals</title>
+  <title>Thank You | Birdie Golf Club Rentals – Pompano, FL</title>
   <meta name="robots" content="noindex, nofollow" />
   <meta name="google-site-verification" content="eEj8UP75phxO3AONd85HnsfBTCbrSLVxCTytEWNJ_pk" />
   <!-- Google Tag Manager -->
@@ -22,41 +22,203 @@
     gtag('config', 'AW-16902654136');
     gtag('event', 'conversion', { 'send_to': 'AW-16902654136' });
   </script>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;800;900&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    body {
-      font-family: 'Inter', sans-serif;
-      background: #0B1F4B;
-      color: white;
-      min-height: 100vh;
-      display: flex; flex-direction: column; align-items: center; justify-content: center;
-      text-align: center; padding: 2rem;
+    :root {
+      --navy: #0B1F4B; --navy2: #0D2660;
+      --gold: #C9A84C; --gold2: #E2C06A;
+      --white: #FFFFFF; --offwhite: #F5F7FA;
+      --muted: #6B7280; --border: #E2E8F0;
     }
-    .icon { font-size: 4rem; margin-bottom: 1rem; }
-    h1 { font-size: clamp(2rem, 5vw, 3rem); font-weight: 900; letter-spacing: -1.5px; margin-bottom: 0.8rem; }
-    h1 span { color: #C9A84C; }
-    p { color: rgba(255,255,255,0.7); font-size: 1.05rem; line-height: 1.7; max-width: 480px; margin-bottom: 2rem; }
-    .phone { color: #C9A84C; font-weight: 800; font-size: 1.2rem; display: block; margin-bottom: 2rem; }
-    .btn {
-      background: #C9A84C; color: #0B1F4B;
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', sans-serif; color: var(--navy); background: var(--white); }
+    a { text-decoration: none; color: inherit; }
+
+    /* NAV */
+    nav {
+      background: var(--white);
+      border-bottom: 1px solid var(--border);
+      padding: 0 2rem;
+      height: 68px;
+      display: flex; align-items: center; justify-content: space-between;
+      box-shadow: 0 2px 12px rgba(11,31,75,0.07);
+    }
+    .logo-wrap { display: flex; align-items: center; gap: 0.55rem; }
+    .logo-text { font-size: 1.45rem; font-weight: 900; letter-spacing: -1px; color: var(--navy); }
+    .logo-text span { color: var(--gold); }
+    .nav-phone { font-size: 0.9rem; font-weight: 700; color: var(--gold); }
+
+    /* HERO */
+    .hero {
+      background: linear-gradient(135deg, var(--navy) 0%, var(--navy2) 100%);
+      min-height: 80vh;
+      display: flex; align-items: center; justify-content: center;
+      text-align: center; padding: 4rem 2rem;
+      position: relative; overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse at 50% 50%, rgba(201,168,76,0.12) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero::after {
+      content: '';
+      position: absolute; bottom: 0; left: 0; right: 0;
+      height: 6px;
+      background: linear-gradient(90deg, #2D6A4F, #40916C, #2D6A4F);
+    }
+    .hero-inner { position: relative; z-index: 1; max-width: 600px; }
+    .check-icon {
+      width: 90px; height: 90px; border-radius: 50%;
+      background: var(--gold);
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 2rem;
+      font-size: 2.5rem;
+      box-shadow: 0 0 40px rgba(201,168,76,0.4);
+    }
+    .hero h1 {
+      font-size: clamp(2.2rem, 5vw, 3.5rem); font-weight: 900;
+      color: var(--white); letter-spacing: -2px; line-height: 1.1;
+      margin-bottom: 1rem;
+    }
+    .hero h1 span { color: var(--gold2); }
+    .hero p {
+      color: rgba(255,255,255,0.7); font-size: 1.05rem;
+      line-height: 1.7; margin-bottom: 2rem;
+    }
+    .hero-actions { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+    .btn-gold {
+      background: var(--gold); color: var(--navy);
       font-weight: 800; font-size: 1rem;
       padding: 0.85rem 2rem; border-radius: 12px;
-      text-decoration: none; transition: background 0.2s;
+      transition: background 0.2s, transform 0.2s;
+      display: inline-block;
     }
-    .btn:hover { background: #E2C06A; }
+    .btn-gold:hover { background: var(--gold2); transform: translateY(-2px); }
+    .btn-outline {
+      background: transparent; color: var(--white);
+      font-weight: 700; font-size: 1rem;
+      padding: 0.85rem 2rem; border-radius: 12px;
+      border: 2px solid rgba(255,255,255,0.3);
+      transition: border-color 0.2s;
+      display: inline-block;
+    }
+    .btn-outline:hover { border-color: var(--gold); color: var(--gold); }
+
+    /* INFO CARDS */
+    .cards-section { padding: 5rem 2rem; background: var(--offwhite); }
+    .container { max-width: 1000px; margin: 0 auto; }
+    .cards-section h2 { text-align: center; font-size: 1.6rem; font-weight: 900; color: var(--navy); letter-spacing: -1px; margin-bottom: 2.5rem; }
+    .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1.2rem; }
+    .card {
+      background: var(--white); border-radius: 16px;
+      padding: 1.8rem; text-align: center;
+      border: 1px solid var(--border);
+      box-shadow: 0 2px 12px rgba(11,31,75,0.05);
+    }
+    .card .icon { font-size: 2rem; margin-bottom: 0.8rem; }
+    .card h3 { font-weight: 800; font-size: 1rem; color: var(--navy); margin-bottom: 0.4rem; }
+    .card p { font-size: 0.87rem; color: var(--muted); line-height: 1.6; }
+
+    /* FOOTER */
+    footer {
+      background: var(--navy); padding: 2.5rem 2rem;
+      border-top: 4px solid var(--gold);
+      text-align: center;
+    }
+    .footer-inner { max-width: 1000px; margin: 0 auto 1.5rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
+    .footer-links { display: flex; gap: 2rem; flex-wrap: wrap; justify-content: center; }
+    .footer-links a { font-size: 0.85rem; color: rgba(255,255,255,0.55); transition: color 0.2s; }
+    .footer-links a:hover { color: var(--gold); }
+    .footer-copy { font-size: 0.8rem; color: rgba(255,255,255,0.35); border-top: 1px solid rgba(255,255,255,0.1); padding-top: 1.5rem; }
+
+    @media (max-width: 640px) {
+      .hero-actions { flex-direction: column; align-items: center; }
+      .footer-inner { justify-content: center; }
+    }
   </style>
 </head>
 <body>
-  <!-- Google Tag Manager (noscript) -->
-  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5QFNL467"
-  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-  <!-- End Google Tag Manager (noscript) -->
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5QFNL467"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
 
-  <div class="icon">⛳</div>
-  <h1>Thank You! We'll Be <span>In Touch</span> Soon.</h1>
-  <p>Your quote request has been received. Our team will contact you shortly to confirm your golf club rental in the Pompano area.</p>
-  <a href="tel:3059542699" class="phone">📞 (305) 954-2699</a>
-  <a href="/" class="btn">← Back to Home</a>
+<!-- NAV -->
+<nav>
+  <div class="logo-wrap">
+    <svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg" width="40" height="40">
+      <circle cx="40" cy="52" r="22" fill="white" stroke="#C9A84C" stroke-width="2.5"/>
+      <circle cx="33" cy="46" r="2" fill="#E2E8F0"/><circle cx="40" cy="43" r="2" fill="#E2E8F0"/>
+      <circle cx="47" cy="46" r="2" fill="#E2E8F0"/><circle cx="36" cy="53" r="2" fill="#E2E8F0"/>
+      <circle cx="44" cy="53" r="2" fill="#E2E8F0"/><circle cx="40" cy="60" r="2" fill="#E2E8F0"/>
+      <circle cx="33" cy="58" r="2" fill="#E2E8F0"/><circle cx="47" cy="58" r="2" fill="#E2E8F0"/>
+      <path d="M18 38 Q8 22 14 10 Q20 24 30 34" fill="#C9A84C" opacity="0.9"/>
+      <path d="M62 38 Q72 22 66 10 Q60 24 50 34" fill="#C9A84C" opacity="0.9"/>
+    </svg>
+    <div class="logo-text">Birdie<span>.</span></div>
+  </div>
+  <span class="nav-phone">📞 (305) 954-2699</span>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <div class="check-icon">✅</div>
+    <h1>Thank You! We'll Be<br/><span>In Touch Soon.</span></h1>
+    <p>Your quote request has been received. Our team will reach out shortly to confirm your golf club rental. We look forward to making your round in South Florida a great one!</p>
+    <div class="hero-actions">
+      <a href="tel:3059542699" class="btn-gold">📞 Call Us Now – (305) 954-2699</a>
+      <a href="/" class="btn-outline">← Back to Home</a>
+    </div>
+  </div>
+</section>
+
+<!-- WHAT'S NEXT -->
+<section class="cards-section">
+  <div class="container">
+    <h2>What Happens Next?</h2>
+    <div class="cards">
+      <div class="card">
+        <div class="icon">📞</div>
+        <h3>We'll Call You</h3>
+        <p>Our team will contact you within a few hours to confirm your reservation details.</p>
+      </div>
+      <div class="card">
+        <div class="icon">⛳</div>
+        <h3>Clubs Ready for You</h3>
+        <p>We'll have your right or left-handed sets ready at your course in Pompano and all South Florida.</p>
+      </div>
+      <div class="card">
+        <div class="icon">🏌️</div>
+        <h3>Enjoy Your Round</h3>
+        <p>Show up, grab your clubs, and play. No hassle, no heavy bags — just golf.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="logo-wrap">
+      <svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg" width="32" height="32">
+        <circle cx="40" cy="52" r="22" fill="white" stroke="#C9A84C" stroke-width="2.5"/>
+        <path d="M18 38 Q8 22 14 10 Q20 24 30 34" fill="#C9A84C" opacity="0.9"/>
+        <path d="M62 38 Q72 22 66 10 Q60 24 50 34" fill="#C9A84C" opacity="0.9"/>
+      </svg>
+      <div class="logo-text" style="color:white;">Birdie<span>.</span></div>
+    </div>
+    <div class="footer-links">
+      <a href="/">Home</a>
+      <a href="/privacy-policy.html">Privacy Policy</a>
+      <a href="tel:3059542699">📞 (305) 954-2699</a>
+    </div>
+  </div>
+  <div class="footer-copy">© 2026 Birdie Golf Club Rentals · Pompano, FL · All rights reserved.</div>
+</footer>
+
 </body>
 </html>
