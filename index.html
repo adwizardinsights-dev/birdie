@@ -594,8 +594,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 </footer>
 
 <script>
-  const SCRIPT_URL = "PASTE_YOUR_APPS_SCRIPT_URL_HERE";
-
   function submitForm(e) {
     e.preventDefault();
     const name  = document.getElementById('f-name').value.trim();
@@ -617,22 +615,30 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     data.append('name', name);
     data.append('email', email);
     data.append('phone', phone);
-    data.append('right', right);
-    data.append('left', left);
+    data.append('Right-Handed Sets', right);
+    data.append('Left-Handed Sets', left);
 
-    fetch(SCRIPT_URL, { method: 'POST', body: data })
-      .then(() => {
+    fetch('https://formspree.io/f/mvzwglkl', {
+      method: 'POST',
+      body: data,
+      headers: { 'Accept': 'application/json' }
+    })
+    .then(res => {
+      if (res.ok) {
         document.getElementById('form-fields').style.display = 'none';
         document.getElementById('form-success').style.display = 'block';
         if (typeof gtag !== 'undefined') {
           gtag('event', 'conversion', { 'send_to': 'AW-16902654136' });
         }
-      })
-      .catch(() => {
-        btn.textContent = '⛳ Send My Quote Request';
-        btn.disabled = false;
-        alert('Something went wrong. Please call us at (305) 954-2699.');
-      });
+      } else {
+        throw new Error('Failed');
+      }
+    })
+    .catch(() => {
+      btn.textContent = '⛳ Send My Quote Request';
+      btn.disabled = false;
+      alert('Something went wrong. Please call us at (305) 954-2699.');
+    });
   }
 </script>
 </body>
