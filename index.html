@@ -375,36 +375,34 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <div class="quote-form">
       <h2>Reserve Your Clubs Today</h2>
       <p>Get a fast quote — we'll confirm same day.</p>
-      <div id="form-success" style="display:none; background:#d1fae5; border:1px solid #6ee7b7; border-radius:10px; padding:1rem; text-align:center; color:#065f46; font-weight:700; margin-bottom:1rem;">
-        ✅ Thanks! We'll contact you shortly.
-      </div>
-      <div id="form-fields">
+      <form action="https://formspree.io/f/xlgpdzbj" method="POST">
+        <input type="hidden" name="_next" value="https://www.birdiegolfrentals.com/thank-you.html" />
         <div class="form-group">
           <label>Full Name</label>
-          <input id="f-name" type="text" placeholder="John Smith" required />
+          <input type="text" name="name" placeholder="John Smith" required />
         </div>
         <div class="form-row">
           <div class="form-group">
             <label>Email</label>
-            <input id="f-email" type="email" placeholder="you@email.com" required />
+            <input type="email" name="email" placeholder="you@email.com" required />
           </div>
           <div class="form-group">
             <label>Phone</label>
-            <input id="f-phone" type="tel" placeholder="(305) 000-0000" required />
+            <input type="tel" name="phone" placeholder="(305) 000-0000" required />
           </div>
         </div>
         <div class="form-row">
           <div class="form-group">
             <label># Sets Right Handed</label>
-            <input id="f-right" type="number" placeholder="0" min="0" />
+            <input type="number" name="Right-Handed Sets" placeholder="0" min="0" />
           </div>
           <div class="form-group">
             <label># Sets Left Handed</label>
-            <input id="f-left" type="number" placeholder="0" min="0" />
+            <input type="number" name="Left-Handed Sets" placeholder="0" min="0" />
           </div>
         </div>
-        <button class="btn-submit" id="f-btn" onclick="submitForm(event)">⛳ Send My Quote Request</button>
-      </div>
+        <button type="submit" class="btn-submit">⛳ Send My Quote Request</button>
+      </form>
     </div>
   </div>
 </section>
@@ -594,49 +592,5 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <div class="footer-copy">© 2026 Birdie Golf Club Rentals · Pompano, FL · All rights reserved.</div>
 </footer>
 
-<script>
-  function submitForm(e) {
-    e.preventDefault();
-    const name  = document.getElementById('f-name').value.trim();
-    const email = document.getElementById('f-email').value.trim();
-    const phone = document.getElementById('f-phone').value.trim();
-    const right = document.getElementById('f-right').value || '0';
-    const left  = document.getElementById('f-left').value || '0';
-
-    if (!name || !email || !phone) {
-      alert('Please fill in Name, Email and Phone.');
-      return;
-    }
-
-    const btn = document.getElementById('f-btn');
-    btn.textContent = 'Sending...';
-    btn.disabled = true;
-
-    const data = new FormData();
-    data.append('name', name);
-    data.append('email', email);
-    data.append('phone', phone);
-    data.append('Right-Handed Sets', right);
-    data.append('Left-Handed Sets', left);
-
-    fetch('https://formspree.io/f/xlgpdzbj', {
-      method: 'POST',
-      body: data,
-      headers: { 'Accept': 'application/json' }
-    })
-    .then(res => {
-      if (res.ok) {
-        window.location.href = 'https://www.birdiegolfrentals.com/thank-you.html';
-      } else {
-        throw new Error('Failed');
-      }
-    })
-    .catch(() => {
-      btn.textContent = '⛳ Send My Quote Request';
-      btn.disabled = false;
-      alert('Something went wrong. Please call us at (305) 954-2699.');
-    });
-  }
-</script>
 </body>
 </html>
