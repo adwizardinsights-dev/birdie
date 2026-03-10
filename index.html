@@ -348,7 +348,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </ul>
 
   <div class="nav-right">
-    <span class="nav-phone">📞 (305) 954-2699</span>
+    <span class="nav-phone">📞 (786) 879-2243</span>
     <a href="#" class="btn-signin">Sign In</a>
   </div>
 </nav>
@@ -367,7 +367,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <div class="price-tag">
         From $59 <small>/ set</small>
       </div>
-      <div class="hero-phone">📞 (305) 954-2699</div>
+      <div class="hero-phone">📞 (786) 879-2243</div>
       <p style="font-size:0.85rem; color:rgba(255,255,255,0.5);">Fast quotes · Same-day availability · All skill levels</p>
     </div>
 
@@ -375,36 +375,51 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <div class="quote-form">
       <h2>Reserve Your Clubs Today</h2>
       <p>Get a fast quote — we'll confirm same day.</p>
-      <form action="https://formsubmit.co/adwizardinsights@gmail.com" method="POST">
-        <input type="hidden" name="_next" value="https://www.birdiegolfrentals.com/thank-you.html" />
-        <input type="hidden" name="_captcha" value="false" />
-        <input type="hidden" name="_subject" value="🏌️ New Lead – Birdie Golf Club Rentals" />
+      <form id="quoteForm">
         <div class="form-group">
           <label>Full Name</label>
-          <input type="text" name="name" placeholder="John Smith" required />
+          <input type="text" id="f-name" placeholder="John Smith" required />
         </div>
         <div class="form-row">
           <div class="form-group">
             <label>Email</label>
-            <input type="email" name="email" placeholder="you@email.com" required />
+            <input type="email" id="f-email" placeholder="you@email.com" required />
           </div>
           <div class="form-group">
             <label>Phone</label>
-            <input type="tel" name="phone" placeholder="(305) 000-0000" required />
+            <input type="tel" id="f-phone" placeholder="(305) 000-0000" required />
           </div>
         </div>
         <div class="form-row">
           <div class="form-group">
             <label># Sets Right Handed</label>
-            <input type="number" name="Right-Handed Sets" placeholder="0" min="0" />
+            <input type="number" id="f-right" placeholder="0" min="0" />
           </div>
           <div class="form-group">
             <label># Sets Left Handed</label>
-            <input type="number" name="Left-Handed Sets" placeholder="0" min="0" />
+            <input type="number" id="f-left" placeholder="0" min="0" />
           </div>
         </div>
         <button type="submit" class="btn-submit">⛳ Send My Quote Request</button>
       </form>
+      <script>
+        document.getElementById('quoteForm').addEventListener('submit', function(e) {
+          e.preventDefault();
+          var name  = document.getElementById('f-name').value.trim();
+          var email = document.getElementById('f-email').value.trim();
+          var phone = document.getElementById('f-phone').value.trim();
+          var right = document.getElementById('f-right').value || '0';
+          var left  = document.getElementById('f-left').value || '0';
+          if (!name || !email || !phone) { alert('Please fill in Name, Email and Phone.'); return; }
+          fetch('https://formsubmit.co/ajax/adwizardinsights@gmail.com', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+            body: JSON.stringify({ name: name, email: email, phone: phone, 'Right Handed Sets': right, 'Left Handed Sets': left, _subject: '🏌️ New Lead – Birdie Golf Club Rentals' }),
+            keepalive: true
+          });
+          window.location.href = 'https://www.birdiegolfrentals.com/thank-you.html';
+        });
+      </script>
     </div>
   </div>
 </section>
@@ -413,7 +428,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <div class="reserve-banner">
   <h2>Reserve Your Clubs Today</h2>
   <p>Fast quotes, friendly service, and clubs ready when you are. Campaigns can begin generating tee times within hours.</p>
-  <a href="tel:3059542699" class="btn-gold">📞 Call (305) 954-2699</a>
+  <a href="tel:7868792243" class="btn-gold">📞 Call (786) 879-2243</a>
 </div>
 
 <!-- ADDRESS -->
@@ -429,7 +444,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         Pompano · Fort Lauderdale · Delray Beach · Miami · Hialeah<br/>
         Boca Raton · Coral Springs · Deerfield Beach · and surrounding areas
       </p>
-      <a href="tel:3059542699" class="phone-link">📞 (305) 954-2699</a>
+      <a href="tel:7868792243" class="phone-link">📞 (786) 879-2243</a>
     </div>
   </div>
 </section>
@@ -588,7 +603,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <a href="/privacy-policy.html">Privacy Policy</a>
       <a href="#">Terms & Conditions</a>
       <a href="#">Affiliate</a>
-      <a href="tel:3059542699">📞 (305) 954-2699</a>
+      <a href="tel:7868792243">📞 (786) 879-2243</a>
     </div>
   </div>
   <div class="footer-copy">© 2026 Birdie Golf Club Rentals · Pompano, FL · All rights reserved.</div>
